@@ -1,0 +1,19 @@
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/NPM_ADD_PACKAGE.cmake
+)
+
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/NPM_GENERATE_PACKAGE_NAME.cmake
+)
+
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/NPM_SET_ARCHITECTURE.cmake
+)
+
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/NPM_PREPARE_PACKAGE.cmake
+)
+
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/NPM_PREPARE_PACKAGES.cmake
+)
