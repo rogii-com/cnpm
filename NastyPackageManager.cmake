@@ -17,3 +17,7 @@ include(
 include(
     ${CMAKE_CURRENT_LIST_DIR}/NPM_PREPARE_PACKAGES.cmake
 )
+
+include(
+    ${CMAKE_CURRENT_LIST_DIR}/CNPM_INSTALL_EXPLICIT.cmake
+)
