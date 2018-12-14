@@ -8,7 +8,7 @@ project(
 )
 
 include(
-    "${CNPM_ROOT}/NastyPackageManager.cmake"
+    "${CNPM_SOURCE_ROOT}/NastyPackageManager.cmake"
 )
 
 NPM_ADD_PACKAGE(
@@ -62,8 +62,12 @@ set(
     1
 )
 
+# URLs may be specified on a separate lines/separated by space-symbols or
+# as a list or even combined
 NPM_PREPARE_PACKAGES(
     DEFAULT_REPOSITORY_URLS
-    "file:///${PROJECT_SOURCE_DIR};file:///${PROJECT_SOURCE_DIR}/3repository;file:///${PROJECT_SOURCE_DIR}/private_repository"
+        "file:///${PROJECT_SOURCE_DIR};file:///${PROJECT_SOURCE_DIR}/3repository"
+        "file:///${PROJECT_SOURCE_DIR}/private_repository"
+        #"file:///${PROJECT_SOURCE_DIR};file:///${PROJECT_SOURCE_DIR}/3repository;file:///${PROJECT_SOURCE_DIR}/private_repository"
 )
 
