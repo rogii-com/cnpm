@@ -21,3 +21,7 @@ add_subdirectory(
 add_subdirectory(
     twoEmptyTags
 )
+
+add_subdirectory(
+    defaultUrlList
+)

@@ -3,6 +3,10 @@ macro(
 )
     set(
         oneValueArgs
+    )
+
+    set(
+        multiValueArgs
         DEFAULT_REPOSITORY_URLS
     )
 
@@ -10,7 +14,7 @@ macro(
         NPM_ARGS
         ""
         "${oneValueArgs}"
-        ""
+        "${multiValueArgs}"
         ${ARGN}
     )
 
