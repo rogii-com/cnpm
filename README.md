@@ -24,7 +24,8 @@ the following scheme:
     mustn't contain minuses. Version is a numbers separated by points: 3.4.5.1, 1.0.2.
     Arch is x86, amd64 or anyarch. Build_number is just a number of the build. Tag is
     an arbitrary string (commit hash, branch name, etc) but has to be started with
-    non-digit character.
+    non-digit character.  
+
 The archive has to contain folder with the same name. For example, if there is a
 package 'protobuf-2.6.1-x86-0sdk14393\_vs2015up3.7z', then after extracting there will
 be a folder with name 'protobuf-2.6.1-x86-0sdk14393\_vs2015up3'.
@@ -33,10 +34,10 @@ CNPM. It is required to perform some initialization of the package. Check some p
 for details.
 
 Examples:
-- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_ROOT:PATH="c:\path\to\env" ..\project`
+- `> cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DNPM_ROOT:PATH="c:\path\to\env" ..\project`
     the environment will be downloaded from the default URL and put to "c:\path\to\env"
-- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_REPOSITORY\_URLS="http://env.server.org" ..\project`
+- `> cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DNPM_REPOSITORY_URLS="http://env.server.org" ..\project`
     use the alternative URL of repository
-- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_FORCE=1 -DNPM\_ONLY=1 ..\project`
+- `> cmake -G Ninja -DCMAKE_BUILD_TYPE=Debug -DNPM_FORCE=1 -DNPM_ONLY=1 ..\project`
     just create a local mirror of the environment
 
