@@ -8,7 +8,7 @@ CNPM supports the following options:
 - NPM\_ROOT - path on the local machine where the dependencies will be downloaded and
     extracted. NPM also accepts the environment variable with the same name. CMake
     variable has greater priority than environment one.
-    If not specified then it defaults to `"${CMAKE\_BINARY\_DIR}/3rd\_party"`.
+    If not specified then it defaults to `"${CMAKE_BINARY_DIR}/3rd_party"`.
     The value is stored in the cache so when CMake is called next time
 - NPM\_FORCE - flag. If specified - all required dependencies (the archive and the extracted
     folder) are removed. I.e. it is needed to reinitialize the environment if some issues
@@ -33,10 +33,10 @@ CNPM. It is required to perform some initialization of the package. Check some p
 for details.
 
 Examples:
-    - > cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_ROOT:PATH="c:\path\to\env" ..\project
-        the environment will be downloaded from the default URL and put to "c:\path\to\env"
-    - > cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_REPOSITORY\_URLS="http://env.server.org" ..\project
-        use the alternative URL of repository
-    - > cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_FORCE=1 -DNPM\_ONLY=1 ..\project
-        just create a local mirror of the environment
+- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_ROOT:PATH="c:\path\to\env" ..\project`
+    the environment will be downloaded from the default URL and put to "c:\path\to\env"
+- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_REPOSITORY\_URLS="http://env.server.org" ..\project`
+    use the alternative URL of repository
+- `> cmake -G Ninja -DCMAKE\_BUILD\_TYPE=Debug -DNPM\_FORCE=1 -DNPM\_ONLY=1 ..\project`
+    just create a local mirror of the environment
 
