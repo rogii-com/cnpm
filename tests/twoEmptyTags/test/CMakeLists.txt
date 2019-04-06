@@ -3,13 +3,10 @@ cmake_minimum_required(
     3.9.6
 )
 
-cmake_policy(
-    SET
-    CMP0043 OLD
-)
-
 project(
     test
+    LANGUAGES
+        NONE
 )
 
 include(
@@ -21,6 +18,8 @@ NPM_ADD_PACKAGE(
         Qt
     VERSION
         5.9.0
+    ARCHITECTURE
+        amd64
 )
 
 NPM_ADD_PACKAGE(
