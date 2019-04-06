@@ -21,6 +21,8 @@ NPM_ADD_PACKAGE(
         Qt
     VERSION
         5.9.0
+    ARCHITECTURE
+        amd64
 )
 
 NPM_ADD_PACKAGE(
