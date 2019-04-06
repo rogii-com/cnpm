@@ -3,13 +3,10 @@ cmake_minimum_required(
     3.9.6
 )
 
-cmake_policy(
-    SET
-    CMP0043 OLD
-)
-
 project(
     CMakeNastyPackageManager
+    LANGUAGES
+        NONE
 )
 
 enable_testing()
