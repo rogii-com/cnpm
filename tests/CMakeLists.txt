@@ -22,3 +22,21 @@ add_subdirectory(
 add_subdirectory(
     defaultUrlList
 )
+
+add_test(
+    NAME
+        severalAddPackage
+    COMMAND
+        ${CMAKE_COMMAND}
+        -E
+        ${PROJECT_BINARY_DIR}/severalAddPackage
+    COMMAND
+        ${CMAKE_COMMAND}
+        -G
+        ${CMAKE_GENERATOR}
+        -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+        -DCNPM_ROOT=${CMAKE_SOURCE_DIR}/..
+        ${PROJECT_SOURCE_DIR}/severalAddPackage
+    WORKING_DIRECTORY
+        ${PROJECT_BINARY_DIR}/severalAddPackage
+)
