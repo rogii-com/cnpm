@@ -50,6 +50,20 @@ function(
         )
     endif()
 
+    string(
+        TOLOWER
+            "${NPM_ARGS_NAME}"
+            LOWERED_PACKAGE_NAME
+    )
+
+    if(LOWERED_PACKAGE_NAME IN_LIST NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES)
+        message(
+            WARNING
+            "The package '${NPM_ARGS_NAME}' has already been added. Ignored."
+        )
+        return()
+    endif()
+
     if(NPM_ARGS_UNPARSED_ARGUMENTS)
         message(
             FATAL_ERROR
@@ -112,13 +126,13 @@ function(
     if(COUNT GREATER 0)
         set(
             NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES
-            "${NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES};${NPM_ARGS_NAME}"
+            "${NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES};${LOWERED_PACKAGE_NAME}"
             PARENT_SCOPE
         )
     else()
         set(
             NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES
-            "${NPM_ARGS_NAME}"
+            "${LOWERED_PACKAGE_NAME}"
             PARENT_SCOPE
         )
     endif()
