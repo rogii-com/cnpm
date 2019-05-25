@@ -24,7 +24,7 @@ NPM_ADD_PACKAGE(
 
 NPM_ADD_PACKAGE(
     NAME
-        Qt
+        qt
     VERSION
         5.9.0
     ARCHITECTURE

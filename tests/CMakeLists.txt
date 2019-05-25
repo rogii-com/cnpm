@@ -23,13 +23,14 @@ add_subdirectory(
     defaultUrlList
 )
 
+file(
+    MAKE_DIRECTORY
+        ${PROJECT_BINARY_DIR}/severalAddPackage
+)
+
 add_test(
     NAME
         severalAddPackage
-    COMMAND
-        ${CMAKE_COMMAND}
-        -E
-        ${PROJECT_BINARY_DIR}/severalAddPackage
     COMMAND
         ${CMAKE_COMMAND}
         -G
