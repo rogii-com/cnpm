@@ -126,6 +126,11 @@ function(
         return()
     endif()
 
+    set(
+        ADVICE_TEXT
+        ""
+    )
+
     if(NOT EXISTS "${OUTPUT_FILEPATH}")
         foreach(
             REPOSITORY
@@ -174,6 +179,11 @@ function(
                 continue()
             endif()
 
+            set(
+                ADVICE_TEXT
+                "The package has been recently downloaded. We recommend you to additionally check the package file on the server."
+            )
+
             break()
         endforeach()
     endif()
@@ -190,17 +200,48 @@ function(
             "${ROOT}/"
         RESULT_VARIABLE
             EXTRACTING_STATUS
+        OUTPUT_VARIABLE
+            OUTPUT
+        ERROR_VARIABLE
+            ERROR
     )
 
     message(
         STATUS
-        "after extracting"
+        "stdout = ${OUTPUT}"
     )
 
-    if(NOT EXTRACTING_STATUS EQUAL 0)
+    message(
+        STATUS
+        "stderr = ${ERROR}"
+    )
+
+    message(
+        STATUS
+        "after extracting; status = ${EXTRACTING_STATUS}"
+    )
+
+    # see cmake sources (Source/cmSystemTools.cxx +1483)
+    string(
+        FIND
+        "${ERROR}"
+        "cmake -E tar: error: "
+        ERROR_INDEX
+    )
+
+    if(NOT EXTRACTING_STATUS EQUAL 0
+        OR NOT ERROR_INDEX EQUAL -1
+    )
+        file(
+            REMOVE
+            "${OUTPUT_FILEPATH}"
+        )
+
         message(
             FATAL_ERROR
-            "NPM_PREPARE_PACKAGE: Failed to extract a package (${NPM_ARGS_PACKAGE_NAME}); status = ${EXTRACTING_STATUS}"
+            "CNPM_PREPARE_PACKAGE: Failed to extract corrupted package (${NPM_ARGS_PACKAGE_NAME})."
+            " '${OUTPUT_FILEPATH}' was deleted."
+            " ${ADVICE_TEXT}"
         )
     endif()
 endfunction()
