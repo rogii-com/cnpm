@@ -40,13 +40,18 @@ function(
         ${ARGN}
     )
 
-    if(
-        NOT NPM_ARGS_NAME
-        OR NOT NPM_ARGS_VERSION
-    )
+    if(NOT NPM_ARGS_NAME)
         message(
             FATAL_ERROR
-            "NPM_ADD_PACKAGE: NAME and VERSION are required arguments."
+            "CNPM_ADD_PACKAGE: NAME is the required argument."
+        )
+    endif()
+
+    if(NOT NPM_ARGS_VERSION MATCHES "^[0-9]+(\.[0-9]+)*$")
+        message(
+            FATAL_ERROR
+            "CNPM_ADD_PACKAGE: VERSION is the required argument. (NAME = '${NPM_ARGS_NAME}')"
+            " Current value - '${NPM_ARGS_VERSION}' - does not conform to the version format."
         )
     endif()
 
