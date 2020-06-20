@@ -24,7 +24,7 @@ function(
 )
     set(
         oneValueArgs
-        PACKAGE_NAME FORCE ROOT ARCHIVE_TYPE
+        PACKAGE_NAME FORCE ROOT TMP ARCHIVE_TYPE
     )
 
     set(
@@ -106,9 +106,14 @@ function(
         "${ROOT}/${NPM_ARGS_PACKAGE_NAME}.${ARCHIVE_TYPE}"
     )
 
+    set(
+        TMP_OUTPUT_FILEPATH
+        "${NPM_ARGS_TMP}/${NPM_ARGS_PACKAGE_NAME}.${ARCHIVE_TYPE}"
+    )
+
     message(
         STATUS
-        "OUTPUT_PATH = ${OUTPUT_PATH}; OUTPUT_FILEPATH = ${OUTPUT_FILEPATH}"
+        "OUTPUT_PATH = ${OUTPUT_PATH}; OUTPUT_FILEPATH = ${OUTPUT_FILEPATH}; TMP_OUTPUT_FILEPATH = ${TMP_OUTPUT_FILEPATH}"
     )
 
     if(FORCE)
@@ -149,7 +154,7 @@ function(
             file(
                 DOWNLOAD
                     ${INPUT_PATH}
-                    "${OUTPUT_FILEPATH}"
+                    "${TMP_OUTPUT_FILEPATH}"
                 SHOW_PROGRESS
                 STATUS
                     DOWNLOAD_STATUS
@@ -178,6 +183,13 @@ function(
                 )
                 continue()
             endif()
+
+            # we're still alive so move the file
+            file(
+                RENAME
+                ${TMP_OUTPUT_FILEPATH}
+                ${OUTPUT_FILEPATH}
+            )
 
             set(
                 ADVICE_TEXT

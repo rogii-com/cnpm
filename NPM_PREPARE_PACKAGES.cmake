@@ -1,6 +1,18 @@
 macro(
     NPM_PREPARE_PACKAGES
 )
+    if(DEFINED P)
+        set(
+            CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P
+            "${P}"
+        )
+    endif()
+
+    set(
+        P
+        "CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_"
+    )
+
     set(
         oneValueArgs
     )
@@ -92,6 +104,40 @@ macro(
     endif()
     # TODO: remove redundant '/' from the end
 
+    foreach(${P}INDEX RANGE 2)
+        string(
+            TIMESTAMP
+            ${P}TIMESTAMP
+            "%s"
+        )
+
+        string(
+            RANDOM
+            RANDOM_SEED
+            ${${P}TIMESTAMP}
+            ${P}TMP
+        )
+
+        set(
+            ${P}TMP
+            ${ROOT}/tmp-${${P}TMP}
+        )
+
+        if(NOT EXISTS ${${P}TMP})
+            break()
+        endif()
+
+        unset(${P}TMP)
+    endforeach()
+
+    if(NOT DEFINED ${P}TMP)
+        message(
+            FATAL_ERROR
+            "CNPM_PREPARE_PACKAGES: failed to create temporary subfolder in the root after several attempts."
+            " Please try again later."
+        )
+    endif()
+
     set(
         ONLY
         FALSE
@@ -182,6 +228,8 @@ macro(
                 ${FORCE}
             ROOT
                 ${ROOT}
+            TMP
+                ${${P}TMP}
             ARCHIVE_TYPE
                 7z
         )
@@ -199,6 +247,18 @@ macro(
                 "${INDEX} + 1"
         )
     endwhile()
+
+    file(
+        REMOVE_RECURSE
+        ${${P}TMP}
+    )
+
+    if(DEFINED CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P)
+        set(
+            P
+            "${CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P}"
+        )
+    endif()
 
     if(ONLY)
         return()
