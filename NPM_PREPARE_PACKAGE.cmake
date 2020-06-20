@@ -1,27 +1,4 @@
-#
-# ARGV0 - list of URL of repositories where a package
-#   will be downloaded from.
-# ARGV1 (NAME) - name of a package to prepare.
-# ARGV2 (VERSION) - version of the package.
-# ARGV3 (optional) - explicitly specified architecture.
-#       By default used one determined with help of CMAKE_SIZEOF_VOID_P.
-# ARGV4 (optional) - explicitly specified build number of the package.
-#       The default value is 0.
-# ARGV5 (optional) - explicitly specified tag. A tag is an
-#       arbitrary string of characters. Usually contains some
-#       metainformation about package (for example, a compiler
-#       the package was built with (msvc14/msvs15); or
-#       branch name (master)). The default value is an empty string.
-# ARGV6 (optional) - name of a variable where to store the status
-#       code
-#
-# Status (error) codes:
-#       0 - success
-#       1 - SET_ARCHITECTURE failed
-#
-function(
-    NPM_PREPARE_PACKAGE
-)
+function(NPM_PREPARE_PACKAGE)
     set(
         oneValueArgs
         PACKAGE_NAME FORCE ROOT TMP ARCHIVE_TYPE
