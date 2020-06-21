@@ -186,7 +186,7 @@ function(NPM_PREPARE_PACKAGE)
         COMMAND
             "${CMAKE_COMMAND}" -E tar xvf "${OUTPUT_FILEPATH}"
         WORKING_DIRECTORY
-            "${ROOT}/"
+            "${NPM_ARGS_TMP}"
         RESULT_VARIABLE
             EXTRACTING_STATUS
         OUTPUT_VARIABLE
@@ -233,4 +233,11 @@ function(NPM_PREPARE_PACKAGE)
             " ${ADVICE_TEXT}"
         )
     endif()
+
+    # still alive so move the folder
+    file(
+        RENAME
+        "${NPM_ARGS_TMP}/${NPM_ARGS_PACKAGE_NAME}"
+        "${OUTPUT_PATH}"
+    )
 endfunction()
