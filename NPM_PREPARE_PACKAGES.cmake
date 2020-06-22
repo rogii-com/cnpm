@@ -1,6 +1,4 @@
-macro(
-    NPM_PREPARE_PACKAGES
-)
+macro(NPM_PREPARE_PACKAGES)
     if(DEFINED P)
         set(
             CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P
@@ -13,20 +11,11 @@ macro(
         "CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_"
     )
 
-    set(
-        oneValueArgs
-    )
-
-    set(
-        multiValueArgs
-        DEFAULT_REPOSITORY_URLS
-    )
-
     cmake_parse_arguments(
         NPM_ARGS
         ""
-        "${oneValueArgs}"
-        "${multiValueArgs}"
+        ""
+        "DEFAULT_REPOSITORY_URLS"
         ${ARGN}
     )
 
@@ -39,12 +28,12 @@ macro(
 
     if(NPM_REPOSITORY_URLS)
         set(
-            REPOSITORY_URLS
+            ${P}REPOSITORY_URLS
             "${NPM_REPOSITORY_URLS};${NPM_ARGS_DEFAULT_REPOSITORY_URLS}"
         )
     else()
         set(
-            REPOSITORY_URLS
+            ${P}REPOSITORY_URLS
             "${NPM_ARGS_DEFAULT_REPOSITORY_URLS}"
         )
     endif()
@@ -64,17 +53,17 @@ macro(
 
     message(
         STATUS
-        "REPOSITORY_URLS = ${REPOSITORY_URLS}"
+        "REPOSITORY_URLS = ${${P}REPOSITORY_URLS}"
     )
 
     # optional args
     set(
-        FORCE
+        ${P}FORCE
         FALSE
     )
     if(NPM_FORCE)
         set(
-            FORCE
+            ${P}FORCE
             TRUE
         )
         unset(
@@ -84,21 +73,21 @@ macro(
     endif()
 
     set(
-        ROOT
+        ${P}ROOT
         "${CMAKE_BINARY_DIR}/3rd_party"
     )
     if(NPM_ROOT)
         file(
             TO_CMAKE_PATH
             "${NPM_ROOT}"
-            ROOT
+            ${P}ROOT
         )
     else()
         if(DEFINED ENV{NPM_ROOT})
             file(
                 TO_CMAKE_PATH
                 "$ENV{NPM_ROOT}"
-                ROOT
+                ${P}ROOT
             )
         endif()
     endif()
@@ -120,7 +109,7 @@ macro(
 
         set(
             ${P}TMP
-            ${ROOT}/tmp-${${P}TMP}
+            ${${P}ROOT}/tmp-${${P}TMP}
         )
 
         if(NOT EXISTS ${${P}TMP})
@@ -139,12 +128,12 @@ macro(
     endif()
 
     set(
-        ONLY
+        ${P}ONLY
         FALSE
     )
     if(NPM_ONLY)
         set(
-            ONLY
+            ${P}ONLY
             TRUE
         )
         unset(
@@ -154,80 +143,80 @@ macro(
     endif()
 
     set(
-        INDEX
+        ${P}INDEX
         0
     )
-    while(${INDEX} LESS ${NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_COUNT})
+    while(${${P}INDEX} LESS ${NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_COUNT})
         list(
             GET
                 NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NAMES
-                ${INDEX}
-                NAME
+                ${${P}INDEX}
+                ${P}NAME
         )
 
         list(
             GET
                 NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_VERSIONS
-                ${INDEX}
-                VERSION
+                ${${P}INDEX}
+                ${P}VERSION
         )
 
         list(
             GET
                 NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_ARCHITECTURES
-                ${INDEX}
-                ARCHITECTURE
+                ${${P}INDEX}
+                ${P}ARCHITECTURE
         )
 
         list(
             GET
                 NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_NUMBERS
-                ${INDEX}
-                BUILD
+                ${${P}INDEX}
+                ${P}BUILD
         )
 
         set(
-            TAG
+            ${P}TAG
             ""
         )
 
         list(
             LENGTH
                 NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_TAGS
-                TAGS_COUNT
+                ${P}TAGS_COUNT
         )
-        if(TAGS_COUNT GREATER 0)
+        if(${P}TAGS_COUNT GREATER 0)
             list(
                 GET
                     NPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_TAGS
-                    ${INDEX}
-                    TAG
+                    ${${P}INDEX}
+                    ${P}TAG
             )
         endif()
 
         message(
             STATUS
-            "NAME = ${NAME}; VERSION = ${VERSION}; ARCHITECTURE = ${ARCHITECTURE}; BUILD = ${BUILD}; TAG = ${TAG}"
+            "NAME = ${${P}NAME}; VERSION = ${${P}VERSION}; ARCHITECTURE = ${${P}ARCHITECTURE}; BUILD = ${${P}BUILD}; TAG = ${${P}TAG}"
         )
 
         NPM_GENERATE_PACKAGE_NAME(
-            PACKAGE_NAME
-            ${NAME}
-            ${VERSION}
-            ${ARCHITECTURE}
-            ${BUILD}
-            "${TAG}"
+            ${P}PACKAGE_NAME
+            ${${P}NAME}
+            ${${P}VERSION}
+            ${${P}ARCHITECTURE}
+            ${${P}BUILD}
+            "${${P}TAG}"
         )
 
         NPM_PREPARE_PACKAGE(
             PACKAGE_NAME
-                ${PACKAGE_NAME}
+                ${${P}PACKAGE_NAME}
             REPOSITORY_URLS
-                ${REPOSITORY_URLS}
+                ${${P}REPOSITORY_URLS}
             FORCE
-                ${FORCE}
+                ${${P}FORCE}
             ROOT
-                ${ROOT}
+                ${${P}ROOT}
             TMP
                 ${${P}TMP}
             ARCHIVE_TYPE
@@ -237,14 +226,12 @@ macro(
         # yes, we strictly bound to NPM_PREPARE_PACKAGE.
         # Frankly speaking the function is an internal one is not intended
         # to be used by users
-        include(
-            "${ROOT}/${PACKAGE_NAME}/package.cmake"
-        )
+        include("${${P}ROOT}/${${P}PACKAGE_NAME}/package.cmake")
 
         MATH(
             EXPR
-                INDEX
-                "${INDEX} + 1"
+                ${P}INDEX
+                "${${P}INDEX} + 1"
         )
     endwhile()
 
@@ -260,7 +247,7 @@ macro(
         )
     endif()
 
-    if(ONLY)
+    if(${P}ONLY)
         return()
     endif()
 endmacro()
