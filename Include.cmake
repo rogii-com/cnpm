@@ -5,10 +5,6 @@ include(
 )
 
 include(
-    ${CMAKE_CURRENT_LIST_DIR}/NPM_SET_ARCHITECTURE.cmake
-)
-
-include(
     ${CMAKE_CURRENT_LIST_DIR}/NPM_PREPARE_PACKAGE.cmake
 )
 
