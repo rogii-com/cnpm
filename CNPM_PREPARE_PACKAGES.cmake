@@ -1,4 +1,4 @@
-macro(NPM_PREPARE_PACKAGES)
+macro(CNPM_PREPARE_PACKAGES)
     if(DEFINED P)
         set(
             CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P
@@ -22,7 +22,7 @@ macro(NPM_PREPARE_PACKAGES)
     if(NPM_ARGS_UNPARSED_ARGUMENTS)
         message(
             FATAL_ERROR
-            "NPM_PREPARE_PACKAGES: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
+            "CNPM_PREPARE_PACKAGES: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
         )
     endif()
 
@@ -76,17 +76,17 @@ macro(NPM_PREPARE_PACKAGES)
         ${P}ROOT
         "${CMAKE_BINARY_DIR}/3rd_party"
     )
-    if(NPM_ROOT)
+    if(CNPM_ROOT)
         file(
             TO_CMAKE_PATH
-            "${NPM_ROOT}"
+            "${CNPM_ROOT}"
             ${P}ROOT
         )
     else()
-        if(DEFINED ENV{NPM_ROOT})
+        if(DEFINED ENV{CNPM_ROOT})
             file(
                 TO_CMAKE_PATH
-                "$ENV{NPM_ROOT}"
+                "$ENV{CNPM_ROOT}"
                 ${P}ROOT
             )
         endif()

@@ -24,9 +24,7 @@ set(
     ""
 )
 
-function(
-    NPM_ADD_PACKAGE
-)
+function(CNPM_ADD_PACKAGE)
     set(
         oneValueArgs
         NAME VERSION ARCHITECTURE BUILD_NUMBER TAG
@@ -72,7 +70,7 @@ function(
     if(NPM_ARGS_UNPARSED_ARGUMENTS)
         message(
             FATAL_ERROR
-            "NPM_ADD_PACKAGE: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
+            "CNPM_ADD_PACKAGE: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
         )
     endif()
 
