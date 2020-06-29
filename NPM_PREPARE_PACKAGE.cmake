@@ -21,14 +21,14 @@ function(NPM_PREPARE_PACKAGE)
     if(NOT NPM_ARGS_PACKAGE_NAME)
         message(
             FATAL_ERROR
-            "NPM_PREPARE_PACKAGE: PACKAGE_NAME is a required argument."
+            "CNPM_PREPARE_PACKAGE: PACKAGE_NAME is a required argument."
         )
     endif()
 
     if(NPM_ARGS_UNPARSED_ARGUMENTS)
         message(
             FATAL_ERROR
-            "NPM_PREPARE_PACKAGE: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
+            "CNPM_PREPARE_PACKAGE: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
         )
     endif()
 

@@ -1,4 +1,4 @@
-macro(NPM_PREPARE_PACKAGES)
+macro(CNPM_PREPARE_PACKAGES)
     if(DEFINED P)
         set(
             CNPM_4D2BB0BB_9AFC_4A44_B81A_8F025831AC8C_OLD_P
@@ -22,14 +22,14 @@ macro(NPM_PREPARE_PACKAGES)
     if(NPM_ARGS_UNPARSED_ARGUMENTS)
         message(
             FATAL_ERROR
-            "NPM_PREPARE_PACKAGES: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
+            "CNPM_PREPARE_PACKAGES: there are redundant arguments: '${NPM_ARGS_UNPARSED_ARGUMENTS}'."
         )
     endif()
 
-    if(NPM_REPOSITORY_URLS)
+    if(CNPM_REPOSITORY_URLS)
         set(
             ${P}REPOSITORY_URLS
-            "${NPM_REPOSITORY_URLS};${NPM_ARGS_DEFAULT_REPOSITORY_URLS}"
+            "${CNPM_REPOSITORY_URLS};${NPM_ARGS_DEFAULT_REPOSITORY_URLS}"
         )
     else()
         set(
@@ -47,7 +47,7 @@ macro(NPM_PREPARE_PACKAGES)
     )
 
     unset(
-        NPM_REPOSITORY_URLS
+        CNPM_REPOSITORY_URLS
         CACHE
     )
 
@@ -61,13 +61,13 @@ macro(NPM_PREPARE_PACKAGES)
         ${P}FORCE
         FALSE
     )
-    if(NPM_FORCE)
+    if(CNPM_FORCE)
         set(
             ${P}FORCE
             TRUE
         )
         unset(
-            NPM_FORCE
+            CNPM_FORCE
             CACHE
         )
     endif()
@@ -76,17 +76,17 @@ macro(NPM_PREPARE_PACKAGES)
         ${P}ROOT
         "${CMAKE_BINARY_DIR}/3rd_party"
     )
-    if(NPM_ROOT)
+    if(CNPM_ROOT)
         file(
             TO_CMAKE_PATH
-            "${NPM_ROOT}"
+            "${CNPM_ROOT}"
             ${P}ROOT
         )
     else()
-        if(DEFINED ENV{NPM_ROOT})
+        if(DEFINED ENV{CNPM_ROOT})
             file(
                 TO_CMAKE_PATH
-                "$ENV{NPM_ROOT}"
+                "$ENV{CNPM_ROOT}"
                 ${P}ROOT
             )
         endif()
@@ -131,13 +131,13 @@ macro(NPM_PREPARE_PACKAGES)
         ${P}ONLY
         FALSE
     )
-    if(NPM_ONLY)
+    if(CNPM_ONLY)
         set(
             ${P}ONLY
             TRUE
         )
         unset(
-            NPM_ONLY
+            CNPM_ONLY
             CACHE
         )
     endif()
