@@ -127,6 +127,11 @@ macro(CNPM_PREPARE_PACKAGES)
         )
     endif()
 
+    file(
+        MAKE_DIRECTORY
+        ${${P}TMP}
+    )
+
     set(
         ${P}ONLY
         FALSE
