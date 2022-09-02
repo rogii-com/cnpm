@@ -19,26 +19,26 @@ function(CNPM_ADD_PACKAGE)
     )
 
     IF (NOT DEFINED SEARCH_NAME)
-    foreach(argument ${oneValueArgs})
-        if(argument STREQUAL SHOW_ARGUMENT)
-            execute_process(
-                COMMAND
-                    ${CMAKE_COMMAND}
-                    -E
-                    echo_append
-                    "${NPM_ARGS_${SHOW_ARGUMENT}}"
-                WORKING_DIRECTORY
-                    ${CMAKE_CURRENT_LIST_DIR}
-            )
+        foreach(argument ${oneValueArgs})
+            if(argument STREQUAL SHOW_ARGUMENT)
+                execute_process(
+                    COMMAND
+                        ${CMAKE_COMMAND}
+                        -E
+                        echo_append
+                        "${NPM_ARGS_${SHOW_ARGUMENT}}"
+                    WORKING_DIRECTORY
+                        ${CMAKE_CURRENT_LIST_DIR}
+                )
 
-            return()
-        endif()
-    endforeach()
+                return()
+            endif()
+        endforeach()
 
-    message(
-        FATAL_ERROR
-        "Unknown argument name: '${SHOW_ARGUMENT}'"
-    )
+        message(
+            FATAL_ERROR
+            "Unknown argument name: '${SHOW_ARGUMENT}'"
+        )
     else()
         string(
             TOUPPER
@@ -51,19 +51,19 @@ function(CNPM_ADD_PACKAGE)
                 "${NPM_ARGS_NAME}"
                 PACKAGE_NAME
         )
-        
+
         if("${PACKAGE_NAME}" STREQUAL SEARCH_NAME) 
-        execute_process(
-            COMMAND
-                ${CMAKE_COMMAND}
-                    -E
-                    echo_append
-                    "${NPM_ARGS_${SHOW_ARGUMENT}}"
-                    WORKING_DIRECTORY
-                    ${CMAKE_CURRENT_LIST_DIR}
-                )
-            return()
+            execute_process(
+                COMMAND
+                    ${CMAKE_COMMAND}
+                        -E
+                        echo_append
+                        "${NPM_ARGS_${SHOW_ARGUMENT}}"
+                        WORKING_DIRECTORY
+                        ${CMAKE_CURRENT_LIST_DIR}
+                    )
+                return()
+            endif()
         endif()
-    endif()
 endfunction()
 
