@@ -17,7 +17,8 @@ function(CNPM_ADD_PACKAGE)
             "${SHOW_ARGUMENT}"
             SHOW_ARGUMENT
     )
-    IF (NOT DEFINED SEARCH)
+
+    IF (NOT DEFINED SEARCH_NAME)
     foreach(argument ${oneValueArgs})
         if(argument STREQUAL SHOW_ARGUMENT)
             execute_process(
@@ -41,15 +42,17 @@ function(CNPM_ADD_PACKAGE)
     else()
         string(
             TOUPPER
-                "${SEARCH}"
-                SEARCH
+                "${SEARCH_NAME}"
+                SEARCH_NAME
         )
+
         string(
             TOUPPER
                 "${NPM_ARGS_NAME}"
                 PACKAGE_NAME
         )
-        if("${PACKAGE_NAME}" STREQUAL SEARCH) 
+        
+        if("${PACKAGE_NAME}" STREQUAL SEARCH_NAME) 
         execute_process(
             COMMAND
                 ${CMAKE_COMMAND}
