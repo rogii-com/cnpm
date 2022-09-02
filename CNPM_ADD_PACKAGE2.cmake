@@ -18,25 +18,52 @@ function(CNPM_ADD_PACKAGE)
             SHOW_ARGUMENT
     )
 
-    foreach(argument ${oneValueArgs})
-        if(argument STREQUAL SHOW_ARGUMENT)
+    IF (NOT DEFINED SEARCH_NAME)
+        foreach(argument ${oneValueArgs})
+            if(argument STREQUAL SHOW_ARGUMENT)
+                execute_process(
+                    COMMAND
+                        ${CMAKE_COMMAND}
+                        -E
+                        echo_append
+                        "${NPM_ARGS_${SHOW_ARGUMENT}}"
+                    WORKING_DIRECTORY
+                        ${CMAKE_CURRENT_LIST_DIR}
+                )
+
+                return()
+            endif()
+        endforeach()
+
+        message(
+            FATAL_ERROR
+            "Unknown argument name: '${SHOW_ARGUMENT}'"
+        )
+    else()
+        string(
+            TOUPPER
+                "${SEARCH_NAME}"
+                SEARCH_NAME
+        )
+
+        string(
+            TOUPPER
+                "${NPM_ARGS_NAME}"
+                PACKAGE_NAME
+        )
+
+        if("${PACKAGE_NAME}" STREQUAL SEARCH_NAME) 
             execute_process(
                 COMMAND
                     ${CMAKE_COMMAND}
-                    -E
-                    echo_append
-                    "${NPM_ARGS_${SHOW_ARGUMENT}}"
-                WORKING_DIRECTORY
-                    ${CMAKE_CURRENT_LIST_DIR}
-            )
-
-            return()
+                        -E
+                        echo_append
+                        "${NPM_ARGS_${SHOW_ARGUMENT}}"
+                        WORKING_DIRECTORY
+                        ${CMAKE_CURRENT_LIST_DIR}
+                    )
+                return()
+            endif()
         endif()
-    endforeach()
-
-    message(
-        FATAL_ERROR
-        "Unknown argument name: '${SHOW_ARGUMENT}'"
-    )
 endfunction()
 
